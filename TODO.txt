@@ -1,0 +1,14 @@
+Progress (B - Backlog, I - Implementation, D - Finished)
+
+D	Basic Movement
+D	Basic Shooting
+D	Mouse Position based movement
+D	Stamina system - sprint
+D	Basic Maps
+
+B	Bullet culling after a set amount of time or collision
+B	Bullet fire rate
+B	Full automatic weapon
+B	UI - showing which weapon you have
+B	Character models with different guns
+

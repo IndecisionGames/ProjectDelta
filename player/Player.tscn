@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://player/Player.gd" type="Script" id=1]
+[ext_resource path="res://player/soldier.png" type="Texture" id=2]
+[ext_resource path="res://environment/lightmasks/circle.png" type="Texture" id=3]
+[ext_resource path="res://environment/lightmasks/torchmask.png" type="Texture" id=4]
+[ext_resource path="res://environment/lightmasks/muzzleflash.png" type="Texture" id=5]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 0, 1, 1, 1 )
+self_modulate = Color( 0, 0.905882, 1, 1 )
+position = Vector2( 5.87436, 0.677795 )
+rotation = 1.81165
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 17.5658, -6.64151 )
+texture = ExtResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 50.9887, 0.372604 )
+
+[node name="Pivot" type="Position2D" parent="."]
+editor/display_folded = true
+
+[node name="CameraOffset" type="Position2D" parent="Pivot"]
+position = Vector2( 137.27, -0.307144 )
+
+[node name="Camera2D" type="Camera2D" parent="Pivot/CameraOffset"]
+current = true
+smoothing_enabled = true
+
+[node name="PlayerAmbientLight" type="Light2D" parent="."]
+position = Vector2( 0.349159, -0.349167 )
+scale = Vector2( 3.5042, 3.46055 )
+texture = ExtResource( 3 )
+texture_scale = 0.1
+energy = 0.3
+shadow_enabled = true
+shadow_buffer_size = 256
+
+[node name="TorchLightAmbient" type="Light2D" parent="."]
+position = Vector2( 34.8494, 0.629852 )
+scale = Vector2( 7.316, 15.464 )
+texture = ExtResource( 4 )
+offset = Vector2( 33.16, 0 )
+texture_scale = 0.08
+color = Color( 0.992157, 0.968627, 0.878431, 1 )
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
+
+[node name="TorchLight" type="Light2D" parent="."]
+position = Vector2( 34.8494, 0.629852 )
+scale = Vector2( 10.146, 10.954 )
+texture = ExtResource( 4 )
+offset = Vector2( 21.27, 0 )
+texture_scale = 0.05
+color = Color( 0.992157, 0.968627, 0.878431, 1 )
+energy = 1.5
+shadow_enabled = true
+shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
+
+[node name="MuzzleLight" type="Light2D" parent="."]
+visible = false
+position = Vector2( 49.576, -0.0682415 )
+scale = Vector2( 0.65677, 0.685654 )
+texture = ExtResource( 5 )
+offset = Vector2( 15.27, 0 )
+texture_scale = 0.05
+color = Color( 0.976471, 0.756863, 0, 1 )
+energy = 3.0
+shadow_enabled = true
+
+[node name="MuzzleAmbientLight" type="Light2D" parent="."]
+visible = false
+position = Vector2( 74, 0 )
+texture = ExtResource( 3 )
+texture_scale = 0.5
+color = Color( 0.929412, 0.858824, 0.0901961, 1 )
+energy = 0.75
+shadow_enabled = true
+
+[node name="Tween" type="Tween" parent="."]
