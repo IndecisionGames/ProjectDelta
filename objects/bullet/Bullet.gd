@@ -11,6 +11,16 @@ func _ready():
 	look_at(direction)
 	
 func _process(delta):
-	pass
+	move(delta)
+	collide()
+	
+func move(delta):
 	var motion = direction * BULLET_SPEED
 	set_position(get_position() + motion * delta)
+	
+func collide():
+	var ob = get_overlapping_bodies()
+	if ob.size() > 0:
+		for o in ob:
+			if o.name == "TileMap":
+				queue_free()

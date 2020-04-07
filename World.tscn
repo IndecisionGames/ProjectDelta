@@ -14,7 +14,6 @@ gradient = SubResource( 1 )
 [node name="World" type="Node"]
 
 [node name="Map" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Walls" type="Node" parent="Map"]
 

@@ -45,7 +45,7 @@ func _physics_process(delta):
 			get_parent().add_child(b)
 			b.set_position(get_node("Position2D").get_global_position())
 			toggle_muzzle_flash()
-			tween.interpolate_callback(self, 0.01, "toggle_muzzle_flash")
+			tween.interpolate_callback(self, 0.05, "toggle_muzzle_flash")
 			tween.start()
 	#		var coll = raycast.get_collider()
 	#		if raycast.is_colliding() and coll.has_method("kill"):
@@ -101,7 +101,7 @@ func move(delta):
 	if Input.is_action_pressed("move_right"):
 		move_vec.x += 1
 	move_vec = move_vec.normalized()
-	move_and_collide(move_vec * speed * delta)
+	move_and_slide(move_vec * speed)
 
 func toggle_muzzle_flash():
 	muzzle_flash.set_visible(!muzzle_flash.is_visible())

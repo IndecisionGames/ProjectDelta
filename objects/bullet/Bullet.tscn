@@ -15,8 +15,9 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.8, 0 )
 rotation = 1.5708
-scale = Vector2( 0.3, 0.3 )
+scale = Vector2( 0.4, 0.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
