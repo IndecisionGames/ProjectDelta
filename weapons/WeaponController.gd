@@ -1,28 +1,25 @@
 extends Node2D
 
-
 const GunBuilder = preload("res://weapons/builder/GunBuilder.gd")
 
-# Stats
+# Ammo
 export var medium_ammo: int = 60
 export var light_ammo: int = 90
 export var shotgun_ammo: int = 12
 
-# Assets
-onready var br = GunBuilder.build(self, "BattleRifle")
-onready var pistol = GunBuilder.build(self, "Pistol")
-onready var smg = GunBuilder.build(self, "SMG")
-onready var shotgun = GunBuilder.build(self, "Shotgun")
-onready var sniper = GunBuilder.build(self, "Sniper")
-
-onready var gunList = [br, pistol, smg, shotgun, sniper]
-onready var equipedGun = 0
+# Guns
+export var gun_list = ["BattleRifle", "Pistol", "SMG", "Shotgun", "Sniper"]
+onready var equiped_guns = []
+onready var equiped_gun = 0
 
 signal reload
 signal ammo_change
 
-
 func _ready():
+	for gun_name in gun_list:
+		var gun = GunBuilder.build(self, gun_name)
+		equiped_guns.append(gun)
+	
 	equiped().connect("reload", self, "_on_EquipedGun_reload")
 	equiped().connect("ammo_change", self, "_on_EquipedGun_ammo_change")
 	equiped().make_active()
@@ -48,27 +45,27 @@ func reload():
 	equiped().reload()
 	
 func weapon_up():
-	var new_gun_num = equipedGun + 1
-	if new_gun_num == len(gunList):
+	var new_gun_num = equiped_gun + 1
+	if new_gun_num == len(equiped_guns):
 		new_gun_num = 0
 	switch_weapon(new_gun_num)
 	
 func weapon_down():
-	var new_gun_num = equipedGun - 1
+	var new_gun_num = equiped_gun - 1
 	if new_gun_num < 0:
-		new_gun_num = len(gunList) - 1
+		new_gun_num = len(equiped_guns) - 1
 	switch_weapon(new_gun_num)
 
 
 # Internal
 func equiped():
-	return gunList[equipedGun]
+	return equiped_guns[equiped_gun]
 
 func switch_weapon(num):
-	if num in range(len(gunList)):
+	if num in range(len(equiped_guns)):
 		equiped().disconnect("reload", self, "_on_EquipedGun_reload")
 		equiped().disconnect("ammo_change", self, "_on_EquipedGun_ammo_change")
-		equipedGun = num
+		equiped_gun = num
 		equiped().connect("reload", self, "_on_EquipedGun_reload")
 		equiped().connect("ammo_change", self, "_on_EquipedGun_ammo_change")
 		equiped().make_active()

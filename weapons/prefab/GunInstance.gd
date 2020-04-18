@@ -3,8 +3,6 @@ class_name GunInstance
 
 var parent: Node
 
-var bullet_prefab_filepath: String
-
 var fire_sound_filepath: String
 var reload_start_sound_filepath: String
 var reload_end_sound_filepath: String

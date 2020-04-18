@@ -69,9 +69,13 @@ func _ready():
 # - make_active
 # - process <- should be called by weapon user in _process
 
+# TODO Improve Burst Functionality (add burst delay)
+# TODO Improve valid shot and time since fire logic
+
 func press_trigger():
-	# TODO fix 1 frame bullet delay
 	is_trigger_held = true
+	if time_since_fire > time_per_shot:
+		time_since_fire = time_per_shot
 	if burst_bullets_left == 0:
 		burst_bullets_left = burst_size
 
@@ -90,6 +94,7 @@ func reload():
 
 func make_active():
 	print(gun_name + " Equiped")
+	time_since_fire = time_per_shot
 	emit_signal("reload", is_reloading)
 	emit_signal("ammo_change", current_mag, ammo_count.call_func())
 	
@@ -102,23 +107,32 @@ func process(delta, position, direction):
 
 	process_fire(position, direction)
 
-func valid_shot():
-	if is_reloading:
-		return false
+func process_reload(delta):
+	if !is_reloading:
+		return
 
-	if current_mag == 0:
-		return false
+	time_since_reload += delta
+	var reserve_count = ammo_count.call_func()
+	var original_reserve_count = reserve_count
 
-	if !auto and burst_bullets_left == 0:			# burst and single fire
-		return false
+	if time_since_reload >= reload_time:
+		is_reloading = false
+		time_since_reload = 0.0
+		time_since_fire = time_per_shot
+		burst_bullets_left = burst_size
+		is_trigger_held = false
 
-	if !auto and burst_bullets_left != burst_size:	# burst
-		return true
+		if reserve_count + current_mag >= mag_size:
+			reserve_count -= (mag_size - current_mag)
+			current_mag = mag_size
+		else:
+			current_mag += reserve_count
+			reserve_count = 0
 
-	if !is_trigger_held:
-		return false
-
-	return true 									# full auto
+		reload_end_sound.play()
+		update_ammo_count.call_func(reserve_count - original_reserve_count)
+		emit_signal("reload", is_reloading)
+		emit_signal("ammo_change", current_mag, reserve_count)
 
 func process_fire(position, direction):
 	if !valid_shot():
@@ -133,7 +147,6 @@ func process_fire(position, direction):
 	while time_since_fire >= time_per_shot and valid_shot():
 		time_since_fire -= time_per_shot
 		create_bullets(time_since_fire, position, direction)
-
 
 func create_bullets(backdate_time, position, direction):
 	current_mag -= 1
@@ -156,31 +169,23 @@ func create_bullets(backdate_time, position, direction):
 	emit_signal("ammo_change", current_mag, ammo_count.call_func())
 	fire_sound.play()
 
-func process_reload(delta):
-	if !is_reloading:
-		return
+func valid_shot():
+	if is_reloading:
+		return false
 
-	time_since_reload += delta
-	var reserve_count = ammo_count.call_func()
-	var original_reserve_count = reserve_count
+	if current_mag == 0:
+		return false
 
-	if time_since_reload >= reload_time:
-		is_reloading = false
-		time_since_reload = 0.0
-		burst_bullets_left = burst_size
-		is_trigger_held = false
+	if !auto and burst_bullets_left == 0:
+		return false
 
-		if reserve_count + current_mag >= mag_size:
-			reserve_count -= (mag_size - current_mag)
-			current_mag = mag_size
-		else:
-			current_mag += reserve_count
-			reserve_count = 0
+	if !auto and burst_bullets_left != burst_size:
+		return true
 
-		reload_end_sound.play()
-		update_ammo_count.call_func(reserve_count - original_reserve_count)
-		emit_signal("reload", is_reloading)
-		emit_signal("ammo_change", current_mag, reserve_count)
+	if !is_trigger_held:
+		return false
+
+	return true
 
 func toggle_muzzle_flash():
 	muzzle_flash.set_visible(!muzzle_flash.is_visible())

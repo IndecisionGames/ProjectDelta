@@ -1,5 +1,8 @@
 extends Node
 
+# Premade Guns
+# Not all settings need to be provided, if they are empty a default value is used
+
 const br = {
 	gun_name = "BattleRifle",
 
@@ -17,13 +20,6 @@ const br = {
 	burst_size = 3,
 
 	fire_rate = 10.0,
-	bullets_per_shot = 1,
-
-	bullet_prefab_filepath = "res://objects/bullet/Bullet.tscn",
-	
-	fire_sound_filepath = "res://assets/audio/gun_sounds/smg.wav",
-	reload_start_sound_filepath = "res://assets/audio/gun_sounds/reload_start.wav",
-	reload_end_sound_filepath = "res://assets/audio/gun_sounds/reload_end.wav",
 }
 
 const pistol = {
@@ -42,14 +38,8 @@ const pistol = {
 	auto = false,
 
 	fire_rate = 5.0,
-	bullets_per_shot = 1,
 
-	bullet_prefab_filepath = "res://objects/bullet/Bullet.tscn",
-	
 	fire_sound_filepath = "res://assets/audio/gun_sounds/pistol.wav",
-	reload_start_sound_filepath = "res://assets/audio/gun_sounds/reload_start.wav",
-	reload_end_sound_filepath = "res://assets/audio/gun_sounds/reload_end.wav",
-
 }
 
 const smg = {
@@ -68,13 +58,8 @@ const smg = {
 	auto = true,
 
 	fire_rate = 12.0,
-	bullets_per_shot = 1,
 
-	bullet_prefab_filepath = "res://objects/bullet/Bullet.tscn",
-	
 	fire_sound_filepath = "res://assets/audio/gun_sounds/smg.wav",
-	reload_start_sound_filepath = "res://assets/audio/gun_sounds/reload_start.wav",
-	reload_end_sound_filepath = "res://assets/audio/gun_sounds/reload_end.wav",
 }
 
 const shotgun = {
@@ -92,14 +77,10 @@ const shotgun = {
 
 	auto = false,
 
-	fire_rate = 0.8,
+	fire_rate = 1,
 	bullets_per_shot = 8,
 
-	bullet_prefab_filepath = "res://objects/bullet/Bullet.tscn",
-	
 	fire_sound_filepath = "res://assets/audio/gun_sounds/shotgun.wav",
-	reload_start_sound_filepath = "res://assets/audio/gun_sounds/reload_start.wav",
-	reload_end_sound_filepath = "res://assets/audio/gun_sounds/reload_end.wav",
 }
 
 const sniper = {
@@ -115,17 +96,14 @@ const sniper = {
 	spread = 0.0,
 	bullet_velocity = 50,
 
-	auto = true,
+	auto = false,
 
 	fire_rate = 0.8,
 
-	bullet_prefab_filepath = "res://objects/bullet/Bullet.tscn",
-	
 	fire_sound_filepath = "res://assets/audio/gun_sounds/sniper.wav",
-	reload_start_sound_filepath = "res://assets/audio/gun_sounds/reload_start.wav",
-	reload_end_sound_filepath = "res://assets/audio/gun_sounds/reload_end.wav",
 }
 
+# Add gun to data to register it
 const data = {
 	"BattleRifle": br,
 	"Pistol": pistol,
@@ -135,7 +113,7 @@ const data = {
 }
 
 const GunConfig = preload("res://weapons/builder/GunConfig.gd")
-const GunInstance = preload("res://weapons/Gun.tscn")
+const GunInstance = preload("res://weapons/prefab/Gun.tscn")
 
 static func build(node, gun_to_build) -> GunInstance:
 	var gun_dict = data.get(gun_to_build, pistol)

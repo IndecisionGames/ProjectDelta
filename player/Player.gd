@@ -2,12 +2,7 @@ extends KinematicBody2D
 
 const MOVE_SPEED = 130
 const STAMINA_REC_SPEED = 5
-const BULLET_SCENE = preload("res://objects/bullet/Bullet.tscn")
-const MAG_SIZE = 8
 var stamina = 100
-var ammo = 8
-var reloading = false
-var total_ammo = 36
 
 onready var torch = get_node("TorchLight")
 onready var torch_ambient = get_node("TorchLightAmbient")
@@ -51,19 +46,6 @@ func _physics_process(delta):
 	#		var coll = raycast.get_collider()
 	#		if raycast.is_colliding() and coll.has_method("kill"):
 	#			coll.kill()
-	
-func trigger_reload():
-	if !reloading and ammo < MAG_SIZE and total_ammo > 0:
-		reloading = true
-	
-func reload():
-	reloading = false
-	if total_ammo + ammo >= MAG_SIZE:
-		total_ammo -= (MAG_SIZE - ammo)
-		ammo = MAG_SIZE
-	else:
-		ammo += total_ammo
-		total_ammo = 0 
 
 func sprint(delta):
 	if Input.is_action_pressed("sprint"):

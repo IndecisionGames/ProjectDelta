@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "GunBase",
 "class": "GunInstance",
 "language": "GDScript",
-"path": "res://weapons/builder/GunInstance.gd"
+"path": "res://weapons/prefab/GunInstance.gd"
 } ]
 _global_script_class_icons={
 "GunBase": "",
