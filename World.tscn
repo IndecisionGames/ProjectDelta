@@ -49,7 +49,7 @@ texture = ExtResource( 2 )
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Player" parent="Characters" instance=ExtResource( 3 )]
-position = Vector2( 527.424, 335.734 )
+position = Vector2( 522.781, 338.055 )
 [connection signal="ammo_change" from="Characters/Player" to="UI/GUI" method="_on_Player_ammo_change"]
 [connection signal="reload" from="Characters/Player" to="UI/GUI" method="_on_Player_reload"]
 [connection signal="stamina_changed" from="Characters/Player" to="UI/GUI" method="_on_Player_stamina_changed"]

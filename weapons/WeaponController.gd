@@ -1,18 +1,21 @@
 extends Node2D
 
 
+const GunBuilder = preload("res://weapons/builder/GunBuilder.gd")
+
 # Stats
 export var medium_ammo: int = 60
-export var light_ammo: int = 100
+export var light_ammo: int = 90
 export var shotgun_ammo: int = 12
 
 # Assets
-onready var br = get_node("BR")
-onready var pistol = get_node("Pistol")
-onready var smg = get_node("SMG")
-onready var shotgun = get_node("Shotgun")
+onready var br = GunBuilder.build(self, "BattleRifle")
+onready var pistol = GunBuilder.build(self, "Pistol")
+onready var smg = GunBuilder.build(self, "SMG")
+onready var shotgun = GunBuilder.build(self, "Shotgun")
+onready var sniper = GunBuilder.build(self, "Sniper")
 
-onready var gunList = [pistol, smg, br, shotgun]
+onready var gunList = [br, pistol, smg, shotgun, sniper]
 onready var equipedGun = 0
 
 signal reload
@@ -20,7 +23,6 @@ signal ammo_change
 
 
 func _ready():
-	equipedGun = 0
 	equiped().connect("reload", self, "_on_EquipedGun_reload")
 	equiped().connect("ammo_change", self, "_on_EquipedGun_ammo_change")
 	equiped().make_active()
@@ -73,19 +75,19 @@ func switch_weapon(num):
 
 
 # Ammo Controller
-func get_medium_ammo() -> int:
+func get_ammo_medium() -> int:
 	return medium_ammo
-func update_medium_ammo(ammo):
+func update_ammo_medium(ammo):
 	medium_ammo += ammo
 
-func get_light_ammo() -> int:
+func get_ammo_light() -> int:
 	return light_ammo
-func update_light_ammo(ammo):
+func update_ammo_light(ammo):
 	light_ammo += ammo
 
-func get_shotgun_ammo() -> int:
+func get_ammo_shotgun() -> int:
 	return shotgun_ammo
-func update_shotgun_ammo(ammo):
+func update_ammo_shotgun(ammo):
 	shotgun_ammo += ammo
 
 

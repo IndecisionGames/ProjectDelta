@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "GunBase",
 "language": "GDScript",
 "path": "res://weapons/GunBase.gd"
+}, {
+"base": "Node",
+"class": "GunConfig",
+"language": "GDScript",
+"path": "res://weapons/builder/GunConfig.gd"
+}, {
+"base": "GunBase",
+"class": "GunInstance",
+"language": "GDScript",
+"path": "res://weapons/builder/GunInstance.gd"
 } ]
 _global_script_class_icons={
-"GunBase": ""
+"GunBase": "",
+"GunConfig": "",
+"GunInstance": ""
 }
 
 [application]

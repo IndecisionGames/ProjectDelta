@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sniper.wav-0409b36fd6d9f21cfee5a2e7471e2913.sample"
+
+[deps]
+
+source_file="res://assets/audio/gun_sounds/sniper.wav"
+dest_files=[ "res://.import/sniper.wav-0409b36fd6d9f21cfee5a2e7471e2913.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

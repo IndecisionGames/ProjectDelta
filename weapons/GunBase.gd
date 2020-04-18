@@ -34,8 +34,8 @@ onready var muzzle_flash: Light2D
 onready var muzzle_ambient: Light2D
 
 # Getters
-onready var ammo_count: FuncRef
-onready var  update_ammo_count: FuncRef
+var ammo_count: FuncRef
+var update_ammo_count: FuncRef
 
 signal reload
 signal ammo_change
@@ -70,8 +70,8 @@ func _ready():
 # - process <- should be called by weapon user in _process
 
 func press_trigger():
+	# TODO fix 1 frame bullet delay
 	is_trigger_held = true
-	time_since_fire = time_per_shot
 	if burst_bullets_left == 0:
 		burst_bullets_left = burst_size
 
@@ -144,6 +144,7 @@ func create_bullets(backdate_time, position, direction):
 		var random_spread = rng.randf_range(-1.0, 1.0)
 		var direction_with_spread = direction.rotated(random_spread*spread/100.0)
 		
+		# TODO actually back date the bullet spawn
 		var b = bullet_prefab.instance()
 		b.setup(direction_with_spread, bullet_velocity, fire_range)
 		bullet_node.add_child(b)
