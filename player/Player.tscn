@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/soldier.png" type="Texture" id=2]
 [ext_resource path="res://environment/lightmasks/circle.png" type="Texture" id=3]
 [ext_resource path="res://environment/lightmasks/torchmask.png" type="Texture" id=4]
-[ext_resource path="res://environment/lightmasks/muzzleflash.png" type="Texture" id=5]
+[ext_resource path="res://weapons/Gun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://weapons/WeaponController.gd" type="Script" id=6]
+[ext_resource path="res://weapons/guns/Shotgun.gd" type="Script" id=7]
+[ext_resource path="res://weapons/guns/Pistol.gd" type="Script" id=8]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -56,28 +59,18 @@ energy = 1.5
 shadow_enabled = true
 shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
 
-[node name="MuzzleLight" type="Light2D" parent="."]
-visible = false
-position = Vector2( 49.576, -0.0682415 )
-scale = Vector2( 0.65677, 0.685654 )
-texture = ExtResource( 5 )
-offset = Vector2( 15.27, 0 )
-texture_scale = 0.05
-color = Color( 0.976471, 0.756863, 0, 1 )
-energy = 3.0
-shadow_enabled = true
-
-[node name="MuzzleAmbientLight" type="Light2D" parent="."]
-visible = false
-position = Vector2( 74, 0 )
-texture = ExtResource( 3 )
-offset = Vector2( -30, 0 )
-texture_scale = 0.5
-color = Color( 0.929412, 0.858824, 0.0901961, 1 )
-energy = 0.75
-shadow_enabled = true
-
-[node name="Tween" type="Tween" parent="."]
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -10.7689, 4.63358, -1.05363, -27.2233, 22.2177, -23.1565, 37.3554, -8.24474, 45.2632, 0.566742, 8.20973, 14.8007, -3.9908, 12.7673 )
+
+[node name="WeaponController" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="BR" parent="WeaponController" instance=ExtResource( 5 )]
+
+[node name="Pistol" parent="WeaponController" instance=ExtResource( 5 )]
+script = ExtResource( 8 )
+
+[node name="Shotgun" parent="WeaponController" instance=ExtResource( 5 )]
+script = ExtResource( 7 )
+[connection signal="ammo_change" from="WeaponController" to="." method="_on_WeaponController_ammo_change"]
+[connection signal="reload" from="WeaponController" to="." method="_on_WeaponController_reload"]

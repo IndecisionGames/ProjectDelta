@@ -26,6 +26,9 @@ margin_top = -87.0
 margin_right = -47.0
 margin_bottom = -31.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BottomRight" type="VBoxContainer" parent="."]
 margin_right = 112.0
@@ -70,6 +73,9 @@ margin_top = -104.037
 margin_right = 1232.2
 margin_bottom = 919.963
 texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StaminaBar" type="TextureProgress" parent="BottomRight"]
 margin_top = 43.0

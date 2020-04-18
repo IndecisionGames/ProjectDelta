@@ -13,6 +13,14 @@ gradient = SubResource( 1 )
 
 [node name="World" type="Node"]
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="UI" instance=ExtResource( 4 )]
+margin_left = -174.0
+margin_top = -71.0
+margin_right = -38.0
+margin_bottom = -17.0
+
 [node name="Map" type="Node" parent="."]
 
 [node name="Walls" type="Node" parent="Map"]
@@ -42,14 +50,6 @@ texture = ExtResource( 2 )
 
 [node name="Player" parent="Characters" instance=ExtResource( 3 )]
 position = Vector2( 527.424, 335.734 )
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="GUI" parent="UI" instance=ExtResource( 4 )]
-margin_left = -174.0
-margin_top = -71.0
-margin_right = -38.0
-margin_bottom = -17.0
-[connection signal="ammo_changed" from="Characters/Player" to="UI/GUI" method="_on_Player_ammo_changed"]
-[connection signal="reloading" from="Characters/Player" to="UI/GUI" method="_on_Player_reloading"]
+[connection signal="ammo_change" from="Characters/Player" to="UI/GUI" method="_on_Player_ammo_change"]
+[connection signal="reload" from="Characters/Player" to="UI/GUI" method="_on_Player_reload"]
 [connection signal="stamina_changed" from="Characters/Player" to="UI/GUI" method="_on_Player_stamina_changed"]
