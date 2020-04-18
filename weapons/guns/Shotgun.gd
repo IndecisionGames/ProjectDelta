@@ -10,7 +10,7 @@ func _ready():
 
 	self.fire_range = 5.0
 	self.spread = 25.0
-	self.bullet_velocity = 10
+	self.bullet_velocity = 5
 
 	self.auto = false
 	self.burst_size = 1
@@ -18,10 +18,7 @@ func _ready():
 	self.fire_rate = 2.0
 	self.bullets_per_shot = 10
 
-	self.reserve_count = 20
-	
 	self.bullet_prefab = preload("res://objects/bullet/Bullet.tscn")
-	self.bullet_node = get_parent().get_parent().get_parent()
 
 	self.tween = get_node("Tween")
 	self.muzzle_flash = get_node("MuzzleLight")
@@ -30,5 +27,10 @@ func _ready():
 	self.fire_sound = get_node("FireSound")
 	self.reload_start_sound = get_node("ReloadStartSound")
 	self.reload_end_sound = get_node("ReloadEndSound")
+	
+	# Move to Setup
+	self.bullet_node = get_parent().get_parent().get_parent()
+	self.ammo_count = funcref(get_parent(), 'get_shotgun_ammo')
+	self.update_ammo_count = funcref(get_parent(), 'update_shotgun_ammo')
 
 	._ready()

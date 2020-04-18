@@ -1,21 +1,21 @@
 extends GunBase
 
 func _ready():
-	self.gun_name = "Pistol"
+	self.gun_name = "SMG"
 
 	self.damage = 5.0
 
-	self.mag_size = 8
-	self.reload_time = 1.4
+	self.mag_size = 25
+	self.reload_time = 2.2
 
 	self.fire_range = 10.0
-	self.spread = 2.0
-	self.bullet_velocity = 10
+	self.spread = 5.0
+	self.bullet_velocity = 8
 
-	self.auto = false
+	self.auto = true
 	self.burst_size = 1
 
-	self.fire_rate = 5.0
+	self.fire_rate = 12.0
 	self.bullets_per_shot = 1
 	
 	self.bullet_prefab = preload("res://objects/bullet/Bullet.tscn")

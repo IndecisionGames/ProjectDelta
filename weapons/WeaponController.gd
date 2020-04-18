@@ -2,14 +2,17 @@ extends Node2D
 
 
 # Stats
-# export var reserve_count: int = 80
+export var medium_ammo: int = 60
+export var light_ammo: int = 100
+export var shotgun_ammo: int = 12
 
 # Assets
 onready var br = get_node("BR")
 onready var pistol = get_node("Pistol")
+onready var smg = get_node("SMG")
 onready var shotgun = get_node("Shotgun")
 
-onready var gunList = [br, pistol, shotgun]
+onready var gunList = [pistol, smg, br, shotgun]
 onready var equipedGun = 0
 
 signal reload
@@ -17,9 +20,12 @@ signal ammo_change
 
 
 func _ready():
-	switch_weapon(0)
+	equipedGun = 0
+	equiped().connect("reload", self, "_on_EquipedGun_reload")
+	equiped().connect("ammo_change", self, "_on_EquipedGun_ammo_change")
+	equiped().make_active()
 	
-# Only the following functions should be called
+# Interface (only the following functions should be called)
 # - press_trigger
 # - release_trigger
 # - reload
@@ -52,16 +58,38 @@ func weapon_down():
 	switch_weapon(new_gun_num)
 
 
+# Internal
 func equiped():
 	return gunList[equipedGun]
 
 func switch_weapon(num):
 	if num in range(len(gunList)):
+		equiped().disconnect("reload", self, "_on_EquipedGun_reload")
+		equiped().disconnect("ammo_change", self, "_on_EquipedGun_ammo_change")
 		equipedGun = num
 		equiped().connect("reload", self, "_on_EquipedGun_reload")
 		equiped().connect("ammo_change", self, "_on_EquipedGun_ammo_change")
 		equiped().make_active()
 
+
+# Ammo Controller
+func get_medium_ammo() -> int:
+	return medium_ammo
+func update_medium_ammo(ammo):
+	medium_ammo += ammo
+
+func get_light_ammo() -> int:
+	return light_ammo
+func update_light_ammo(ammo):
+	light_ammo += ammo
+
+func get_shotgun_ammo() -> int:
+	return shotgun_ammo
+func update_shotgun_ammo(ammo):
+	shotgun_ammo += ammo
+
+
+# Signal Relay
 func _on_EquipedGun_reload(is_reloading):
 	emit_signal("reload", is_reloading)
 
