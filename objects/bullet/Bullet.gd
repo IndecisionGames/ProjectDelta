@@ -14,14 +14,13 @@ func setup(dir, bullet_speed, bullet_range):
 	max_range = RANGE_MULTIPLIER * bullet_range
 
 func _ready():
-	set_process(true)
+	set_physics_process(true)
 	look_at(direction)
 	
-func _process(delta):
+func _physics_process(delta):
 	move(delta)
 	collide()
 	range_check()
-	
 	
 func move(delta):
 	var motion = direction * velocity

@@ -14,7 +14,7 @@ const br = {
 
 	fire_range = 20.0,
 	spread = 5.0,
-	bullet_velocity = 20,
+	bullet_velocity = 10,
 
 	auto = false,
 	burst_size = 3,
@@ -33,7 +33,7 @@ const pistol = {
 
 	fire_range = 10.0,
 	spread = 2.0,
-	bullet_velocity = 10,
+	bullet_velocity = 6,
 
 	auto = false,
 
@@ -73,7 +73,7 @@ const shotgun = {
 
 	fire_range = 8.0,
 	spread = 25.0,
-	bullet_velocity = 8,
+	bullet_velocity = 6,
 
 	auto = false,
 
@@ -94,7 +94,7 @@ const sniper = {
 
 	fire_range = 50.0,
 	spread = 0.0,
-	bullet_velocity = 50,
+	bullet_velocity = 25,
 
 	auto = false,
 
