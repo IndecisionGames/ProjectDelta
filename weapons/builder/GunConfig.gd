@@ -8,6 +8,7 @@ var damage: float
 
 var mag_size: int
 var reload_time: float
+var ammo_type
 
 var fire_range: float
 var spread: float
@@ -26,8 +27,8 @@ var reload_start_sound_filepath: String
 var reload_end_sound_filepath: String
 
 # Internal Variables
-var ammo_count_func_name: String
-var update_ammo_count_func_name: String
+var ammo_count_func_name: String = "get_ammo"
+var update_ammo_count_func_name: String = "update_ammo"
 
 # Defaults
 const DEFAULT_NAME = "UNKNOWN"
@@ -35,7 +36,7 @@ const DEFAULT_DAMAGE = 1.0
 
 const DEFAULT_MAG_SIZE = 8
 const DEFAULT_RELOAD_TIME = 2.0
-const DEFAULT_AMMO_TYPE = "light"
+const DEFAULT_AMMO_TYPE = AmmoType.LIGHT
 
 const DEFAULT_FIRE_RANGE = 10.0
 const DEFAULT_SPREAD = 2.0
@@ -60,7 +61,7 @@ func _init(dict):
 
 	mag_size = dict.get("mag_size", DEFAULT_MAG_SIZE)
 	reload_time = dict.get("reload_time", DEFAULT_RELOAD_TIME)
-	var ammo_type = dict.get("ammo_type", DEFAULT_AMMO_TYPE)
+	ammo_type = dict.get("ammo_type", DEFAULT_AMMO_TYPE)
 
 	fire_range = dict.get("fire_range", DEFAULT_FIRE_RANGE)
 	spread = dict.get("spread", DEFAULT_SPREAD)
@@ -77,6 +78,3 @@ func _init(dict):
 	fire_sound_filepath = dict.get("fire_sound_filepath", DEFAULT_FIRE_SOUND_FILE_PATH)
 	reload_start_sound_filepath = dict.get("reload_start_sound_filepath", DEFAULT_RELOAD_START_SOUND_FILE_PATH)
 	reload_end_sound_filepath = dict.get("reload_end_sound_filepath", DEFAULT_RELOAD_END_SOUND_FILE_PATH)
-	
-	ammo_count_func_name = 'get_ammo_%s' % ammo_type
-	update_ammo_count_func_name = 'update_ammo_%s' % ammo_type

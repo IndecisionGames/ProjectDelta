@@ -88,7 +88,7 @@ func kill():
 	
 	
 func pickup_ammo(type, amount):
-	weaponController.update_ammo_medium(amount)
+	weaponController.update_ammo(type, amount)
 
 func _on_WeaponController_reload(is_reloading):
 	emit_signal("reload", is_reloading)

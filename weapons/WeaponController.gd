@@ -3,8 +3,8 @@ extends Node2D
 const GunBuilder = preload("res://weapons/builder/GunBuilder.gd")
 
 # Ammo
-export var medium_ammo: int = 60
 export var light_ammo: int = 90
+export var medium_ammo: int = 60
 export var shotgun_ammo: int = 12
 
 # Guns
@@ -72,20 +72,23 @@ func switch_weapon(num):
 
 
 # Ammo Controller
-func get_ammo_medium() -> int:
-	return medium_ammo
-func update_ammo_medium(ammo):
-	medium_ammo += ammo
-
-func get_ammo_light() -> int:
+func get_ammo(type) -> int:
+	if type == AmmoType.LIGHT:
+		return light_ammo
+	if type == AmmoType.MEDIUM:
+		return medium_ammo
+	if type == AmmoType.SHOTGUN:
+		return shotgun_ammo
+		
 	return light_ammo
-func update_ammo_light(ammo):
-	light_ammo += ammo
 
-func get_ammo_shotgun() -> int:
-	return shotgun_ammo
-func update_ammo_shotgun(ammo):
-	shotgun_ammo += ammo
+func update_ammo(type, ammo):
+	if type == AmmoType.LIGHT:
+		light_ammo += ammo
+	if type == AmmoType.MEDIUM:
+		medium_ammo += ammo
+	if type == AmmoType.SHOTGUN:
+		shotgun_ammo += ammo
 
 
 # Signal Relay

@@ -10,6 +10,7 @@ var damage: float
 
 var mag_size: int
 var reload_time: float         # Seconds
+var ammo_type
 
 var fire_range: float
 var spread: float
@@ -84,7 +85,7 @@ func release_trigger():
 
 func reload():
 	if !is_reloading:
-		if current_mag != mag_size and ammo_count.call_func() > 0:
+		if current_mag != mag_size and ammo_count.call_func(ammo_type) > 0:
 			is_reloading = true
 			time_since_reload = 0.0
 
@@ -96,7 +97,7 @@ func make_active():
 	print(gun_name + " Equiped")
 	time_since_fire = time_per_shot
 	emit_signal("reload", is_reloading)
-	emit_signal("ammo_change", current_mag, ammo_count.call_func())
+	emit_signal("ammo_change", current_mag, ammo_count.call_func(ammo_type))
 	
 func process(delta, position, direction):
 	time_since_fire += delta
@@ -112,7 +113,7 @@ func process_reload(delta):
 		return
 
 	time_since_reload += delta
-	var reserve_count = ammo_count.call_func()
+	var reserve_count = ammo_count.call_func(ammo_type)
 	var original_reserve_count = reserve_count
 
 	if time_since_reload >= reload_time:
@@ -130,7 +131,7 @@ func process_reload(delta):
 			reserve_count = 0
 
 		reload_end_sound.play()
-		update_ammo_count.call_func(reserve_count - original_reserve_count)
+		update_ammo_count.call_func(ammo_type, reserve_count - original_reserve_count)
 		emit_signal("reload", is_reloading)
 		emit_signal("ammo_change", current_mag, reserve_count)
 
@@ -166,7 +167,7 @@ func create_bullets(backdate_time, position, direction):
 	toggle_muzzle_flash()
 	tween.interpolate_callback(self, 0.05, "toggle_muzzle_flash")
 	tween.start()
-	emit_signal("ammo_change", current_mag, ammo_count.call_func())
+	emit_signal("ammo_change", current_mag, ammo_count.call_func(ammo_type))
 	fire_sound.play()
 
 func valid_shot():

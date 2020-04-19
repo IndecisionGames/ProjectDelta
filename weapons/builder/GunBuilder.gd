@@ -10,7 +10,7 @@ const br = {
 
 	mag_size = 30,
 	reload_time = 2.2,
-	ammo_type = 'medium',
+	ammo_type = AmmoType.MEDIUM,
 
 	fire_range = 20.0,
 	spread = 5.0,
@@ -29,7 +29,6 @@ const pistol = {
 
 	mag_size = 8,
 	reload_time = 1.4,
-	ammo_type = 'light',
 
 	fire_range = 10.0,
 	spread = 2.0,
@@ -49,7 +48,6 @@ const smg = {
 
 	mag_size = 25,
 	reload_time = 2.2,
-	ammo_type = 'light',
 
 	fire_range = 10.0,
 	spread = 5.0,
@@ -69,7 +67,7 @@ const shotgun = {
 
 	mag_size = 5,
 	reload_time = 3.0,
-	ammo_type = 'shotgun',
+	ammo_type = AmmoType.SHOTGUN,
 
 	fire_range = 8.0,
 	spread = 25.0,
@@ -90,7 +88,7 @@ const sniper = {
 
 	mag_size = 5,
 	reload_time = 2.5,
-	ammo_type = 'medium',
+	ammo_type = AmmoType.MEDIUM,
 
 	fire_range = 50.0,
 	spread = 0.0,

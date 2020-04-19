@@ -18,6 +18,7 @@ func setup(parent_node: Node, gun_config: GunConfig):
 	
 	self.mag_size = gun_config.mag_size
 	self.reload_time = gun_config.reload_time
+	self.ammo_type = gun_config.ammo_type
 
 	self.fire_range = gun_config.fire_range
 	self.spread = gun_config.spread
@@ -31,7 +32,6 @@ func setup(parent_node: Node, gun_config: GunConfig):
 	
 	self.bullet_prefab = load(gun_config.bullet_prefab_filepath)
 	
-	# Auto make from gun type
 	self.ammo_count_func_name = gun_config.ammo_count_func_name
 	self.update_ammo_count_func_name = gun_config.update_ammo_count_func_name
 	

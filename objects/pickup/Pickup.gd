@@ -1,11 +1,11 @@
 extends Area2D
 
-var time_to_live = 10
+var time_to_live = 30
 var time_live = 0.0
 
 var sprit_filepath = "res://assets/sprites/pickups/ammo/light_ammo.png"
 var pickup_method_call = "pickup_ammo"
-var pickup_method_params = ["light", 40]
+var pickup_method_params = [AmmoType.LIGHT, 40]
 
 func setup(position, ttl, method_call, method_params):
 	set_position(position)
