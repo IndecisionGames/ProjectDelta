@@ -85,6 +85,10 @@ func toggle_torch():
 	
 func kill():
 	get_tree().reload_current_scene()
+	
+	
+func pickup_ammo(type, amount):
+	weaponController.update_ammo_medium(amount)
 
 func _on_WeaponController_reload(is_reloading):
 	emit_signal("reload", is_reloading)

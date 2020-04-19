@@ -16,10 +16,10 @@ func setup(dir, bullet_speed, bullet_range):
 func _ready():
 	set_physics_process(true)
 	look_at(direction)
+	connect("body_entered", self, "_on_Bullet_body_entered")
 	
 func _physics_process(delta):
 	move(delta)
-	collide()
 	range_check()
 	
 func move(delta):
@@ -28,13 +28,9 @@ func move(delta):
 	# TODO: cap at max range if greater then max
 	distance_travelled += motion.length()
 	
-func collide():
-	var ob = get_overlapping_bodies()
-	if ob.size() > 0:
-		for o in ob:
-			if o.name == "TileMap":
-				queue_free()
-
+func _on_Bullet_body_entered(body):
+	if body.name == "TileMap":
+		queue_free()
 
 func range_check():
 	if distance_travelled >= max_range:

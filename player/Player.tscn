@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/soldier.png" type="Texture" id=2]
 [ext_resource path="res://environment/lightmasks/circle.png" type="Texture" id=3]
 [ext_resource path="res://environment/lightmasks/torchmask.png" type="Texture" id=4]
-[ext_resource path="res://environment/lightmasks/torchmaskv2.png" type="Texture" id=6]
-[ext_resource path="res://weapons/WeaponController.gd" type="Script" id=7]
+[ext_resource path="res://weapons/WeaponController.gd" type="Script" id=6]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -36,7 +35,6 @@ shadow_enabled = true
 shadow_buffer_size = 256
 
 [node name="TorchLightAmbient" type="Light2D" parent="."]
-visible = false
 position = Vector2( 34.8494, 0.629852 )
 scale = Vector2( 7.316, 15.464 )
 texture = ExtResource( 4 )
@@ -48,14 +46,13 @@ shadow_enabled = true
 shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
 
 [node name="TorchLight" type="Light2D" parent="."]
-position = Vector2( 86.2963, 3.77213e-06 )
-rotation = 1.5708
-scale = Vector2( 20, 30.7793 )
-texture = ExtResource( 6 )
-offset = Vector2( 0, -8 )
-texture_scale = 0.08
+position = Vector2( 34.8494, 0.629852 )
+scale = Vector2( 10.146, 10.954 )
+texture = ExtResource( 4 )
+offset = Vector2( 21.27, 0 )
+texture_scale = 0.05
 color = Color( 0.992157, 0.968627, 0.878431, 1 )
-energy = 0.6
+energy = 1.5
 shadow_enabled = true
 shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
 
@@ -63,6 +60,6 @@ shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
 polygon = PoolVector2Array( -10.7689, 4.63358, -1.05363, -27.2233, 22.2177, -23.1565, 37.3554, -8.24474, 45.2632, 0.566742, 8.20973, 14.8007, -3.9908, 12.7673 )
 
 [node name="WeaponController" type="Node2D" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 [connection signal="ammo_change" from="WeaponController" to="." method="_on_WeaponController_ammo_change"]
 [connection signal="reload" from="WeaponController" to="." method="_on_WeaponController_reload"]
