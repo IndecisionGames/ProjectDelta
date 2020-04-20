@@ -11,8 +11,9 @@ var reload_time: float
 var ammo_type
 
 var fire_range: float
-var spread: float
 var bullet_velocity: float
+var spread: float
+var movement_penalty: float
 
 var auto: bool
 var burst_size: int
@@ -39,8 +40,9 @@ const DEFAULT_RELOAD_TIME = 2.0
 const DEFAULT_AMMO_TYPE = AmmoType.LIGHT
 
 const DEFAULT_FIRE_RANGE = 10.0
-const DEFAULT_SPREAD = 2.0
 const DEFAULT_BULLET_VELOCITY = 20.0
+const DEFAULT_SPREAD = 2.0
+const DEFAULT_MOVEMENT_PENALTY = 0.0
 
 const DEFAULT_AUTO = false
 const DEFAULT_BURST_SIZE = 1
@@ -64,8 +66,9 @@ func _init(dict):
 	ammo_type = dict.get("ammo_type", DEFAULT_AMMO_TYPE)
 
 	fire_range = dict.get("fire_range", DEFAULT_FIRE_RANGE)
-	spread = dict.get("spread", DEFAULT_SPREAD)
 	bullet_velocity = dict.get("bullet_velocity", DEFAULT_BULLET_VELOCITY)
+	spread = dict.get("spread", DEFAULT_SPREAD)
+	movement_penalty = dict.get("movement_penalty", DEFAULT_MOVEMENT_PENALTY)
 
 	auto = dict.get("auto", DEFAULT_AUTO)
 	burst_size = dict.get("burst_size", DEFAULT_BURST_SIZE)

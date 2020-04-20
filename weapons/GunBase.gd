@@ -13,8 +13,9 @@ var reload_time: float         # Seconds
 var ammo_type
 
 var fire_range: float
-var spread: float
 var bullet_velocity: float
+var spread: float
+var movement_penalty: float
 
 var auto: bool
 var burst_size: int
@@ -99,14 +100,14 @@ func make_active():
 	emit_signal("reload", is_reloading)
 	emit_signal("ammo_change", current_mag, ammo_count.call_func(ammo_type))
 	
-func process(delta, position, direction):
+func process(delta, position, direction, move_speed):
 	time_since_fire += delta
 	process_reload(delta)
 
 	if is_reloading:
 		return
 
-	process_fire(position, direction)
+	process_fire(position, direction, move_speed)
 
 func process_reload(delta):
 	if !is_reloading:
@@ -135,7 +136,7 @@ func process_reload(delta):
 		emit_signal("reload", is_reloading)
 		emit_signal("ammo_change", current_mag, reserve_count)
 
-func process_fire(position, direction):
+func process_fire(position, direction, move_speed):
 	if !valid_shot():
 		return
 
@@ -143,20 +144,21 @@ func process_fire(position, direction):
 		return
 	
 	time_since_fire -= time_per_shot
-	create_bullets(time_since_fire, position, direction)
+	create_bullets(time_since_fire, position, direction, move_speed)
 
 	while time_since_fire >= time_per_shot and valid_shot():
 		time_since_fire -= time_per_shot
-		create_bullets(time_since_fire, position, direction)
+		create_bullets(time_since_fire, position, direction, move_speed)
 
-func create_bullets(backdate_time, position, direction):
+func create_bullets(backdate_time, position, direction, move_speed):
 	current_mag -= 1
 	if !auto:
 		burst_bullets_left -= 1
 
 	for i in range(bullets_per_shot):
-		var random_spread = rng.randf_range(-1.0, 1.0)
-		var direction_with_spread = direction.rotated(random_spread*spread/100.0)
+		
+		
+		var direction_with_spread = direction.rotated(calculate_spread(move_speed))
 		
 		# TODO actually back date the bullet spawn
 		var b = bullet_prefab.instance()
@@ -187,6 +189,14 @@ func valid_shot():
 		return false
 
 	return true
+
+func calculate_spread(move_speed):
+	var random_spread = rng.randf_range(-1.0, 1.0)
+	var natural_spread = spread/100.0
+	var movement_multiplier = movement_penalty*move_speed/5000.0
+	print(random_spread)
+	print (movement_multiplier+natural_spread)
+	return random_spread*min(movement_multiplier+natural_spread, deg2rad(145))
 
 func toggle_muzzle_flash():
 	muzzle_flash.set_visible(!muzzle_flash.is_visible())

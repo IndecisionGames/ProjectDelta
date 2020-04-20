@@ -21,8 +21,9 @@ func setup(parent_node: Node, gun_config: GunConfig):
 	self.ammo_type = gun_config.ammo_type
 
 	self.fire_range = gun_config.fire_range
-	self.spread = gun_config.spread
 	self.bullet_velocity = gun_config.bullet_velocity
+	self.spread = gun_config.spread
+	self.movement_penalty = gun_config.movement_penalty
 
 	self.auto = gun_config.auto
 	self.burst_size = gun_config.burst_size

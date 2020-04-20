@@ -3,6 +3,7 @@ extends KinematicBody2D
 const MOVE_SPEED = 130
 const STAMINA_REC_SPEED = 5
 var stamina = 100
+var current_move_speed
 
 onready var torch = get_node("TorchLight")
 onready var torch_ambient = get_node("TorchLightAmbient")
@@ -23,7 +24,7 @@ func _physics_process(delta):
 	var look_vec = get_global_mouse_position() - global_position
 	global_rotation = atan2(look_vec.y, look_vec.x)
 	
-	weaponController.process(delta, get_node("Position2D").get_global_position(), look_vec.normalized())
+	weaponController.process(delta, get_node("Position2D").get_global_position(), look_vec.normalized(), current_move_speed)
 	
 	if Input.is_action_just_pressed("torch"):
 		toggle_torch()
@@ -76,8 +77,9 @@ func move(delta):
 		move_vec.x -= 1
 	if Input.is_action_pressed("move_right"):
 		move_vec.x += 1
-	move_vec = move_vec.normalized()
-	move_and_slide(move_vec * speed)
+	move_vec = move_vec.normalized() * speed
+	move_and_slide(move_vec)
+	current_move_speed = move_vec.length()
 	
 func toggle_torch():
 	torch.set_visible(!torch.is_visible())

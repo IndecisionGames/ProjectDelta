@@ -32,8 +32,8 @@ func _ready():
 # - weapon_down
 # - process <- should be called by weapon user in _process
 
-func process(delta, position, direction):
-	equiped().process(delta, position, direction)
+func process(delta, position, direction, move_speed):
+	equiped().process(delta, position, direction, move_speed)
 
 func press_trigger():
 	equiped().press_trigger()

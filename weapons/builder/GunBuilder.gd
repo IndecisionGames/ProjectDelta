@@ -13,8 +13,9 @@ const br = {
 	ammo_type = AmmoType.MEDIUM,
 
 	fire_range = 20.0,
-	spread = 5.0,
 	bullet_velocity = 10,
+	spread = 5.0,
+	movement_penalty = 8.0,
 
 	auto = false,
 	burst_size = 3,
@@ -31,8 +32,9 @@ const pistol = {
 	reload_time = 1.4,
 
 	fire_range = 10.0,
-	spread = 2.0,
 	bullet_velocity = 6,
+	spread = 2.0,
+	movement_penalty = 5.0,
 
 	auto = false,
 
@@ -52,6 +54,7 @@ const smg = {
 	fire_range = 10.0,
 	spread = 5.0,
 	bullet_velocity = 8,
+	movement_penalty = 10.0,
 
 	auto = true,
 
@@ -70,8 +73,8 @@ const shotgun = {
 	ammo_type = AmmoType.SHOTGUN,
 
 	fire_range = 8.0,
-	spread = 25.0,
 	bullet_velocity = 6,
+	spread = 25.0,
 
 	auto = false,
 
@@ -91,8 +94,9 @@ const sniper = {
 	ammo_type = AmmoType.MEDIUM,
 
 	fire_range = 50.0,
-	spread = 0.0,
 	bullet_velocity = 25,
+	spread = 0.0,
+	movement_penalty = 20.0,
 
 	auto = false,
 
