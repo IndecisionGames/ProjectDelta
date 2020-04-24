@@ -50,10 +50,11 @@ texture = ExtResource( 2 )
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Player" parent="Characters" instance=ExtResource( 3 )]
-position = Vector2( 522.781, 338.055 )
+position = Vector2( 522.781, 336.507 )
 
 [node name="Pickup" parent="." instance=ExtResource( 5 )]
 position = Vector2( 454.208, 249.93 )
 [connection signal="ammo_change" from="Characters/Player" to="UI/GUI" method="_on_Player_ammo_change"]
 [connection signal="reload" from="Characters/Player" to="UI/GUI" method="_on_Player_reload"]
 [connection signal="stamina_changed" from="Characters/Player" to="UI/GUI" method="_on_Player_stamina_changed"]
+[connection signal="weapon_change" from="Characters/Player" to="UI/GUI" method="_on_Player_weapon_change"]

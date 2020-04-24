@@ -4,6 +4,7 @@ onready var stamina_bar = get_node("BottomRight/StaminaBar")
 onready var ammo_text = get_node("BottomRight/AmmoContainer/Ammo")
 onready var reloading_progress = get_node("BottomRight/AmmoContainer/Reloading")
 onready var tween = get_node("Tween")
+onready var crosshair = get_node("Crosshair")
 
 func _ready():
 	print("test")
@@ -28,3 +29,7 @@ func set_ammo_text(ammo_count):
 	
 func _on_Player_reload(is_reloading):
 	reloading_progress.set_visible(is_reloading)
+
+
+func _on_Player_weapon_change(new_spread):
+	crosshair.updateCrosshairError(new_spread)

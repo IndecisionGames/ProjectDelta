@@ -9,20 +9,21 @@ export var shotgun_ammo: int = 12
 
 # Guns
 export var gun_list = ["BattleRifle", "Pistol", "SMG", "Shotgun", "Sniper"]
-onready var equiped_guns = []
-onready var equiped_gun = 0
+onready var equipped_guns = []
+onready var equipped_gun = 0
 
 signal reload
 signal ammo_change
+signal weapon_change
 
 func _ready():
 	for gun_name in gun_list:
 		var gun = GunBuilder.build(self, gun_name)
-		equiped_guns.append(gun)
+		equipped_guns.append(gun)
 	
-	equiped().connect("reload", self, "_on_EquipedGun_reload")
-	equiped().connect("ammo_change", self, "_on_EquipedGun_ammo_change")
-	equiped().make_active()
+	equipped().connect("reload", self, "_on_equippedGun_reload")
+	equipped().connect("ammo_change", self, "_on_equippedGun_ammo_change")
+	equipped().make_active()
 	
 # Interface (only the following functions should be called)
 # - press_trigger
@@ -33,42 +34,43 @@ func _ready():
 # - process <- should be called by weapon user in _process
 
 func process(delta, position, direction, move_speed):
-	equiped().process(delta, position, direction, move_speed)
+	equipped().process(delta, position, direction, move_speed)
+	emit_signal("weapon_change", equipped().current_spread)
 
 func press_trigger():
-	equiped().press_trigger()
+	equipped().press_trigger()
 
 func release_trigger():
-	equiped().release_trigger()
+	equipped().release_trigger()
 
 func reload():
-	equiped().reload()
+	equipped().reload()
 	
 func weapon_up():
-	var new_gun_num = equiped_gun + 1
-	if new_gun_num == len(equiped_guns):
+	var new_gun_num = equipped_gun + 1
+	if new_gun_num == len(equipped_guns):
 		new_gun_num = 0
 	switch_weapon(new_gun_num)
 	
 func weapon_down():
-	var new_gun_num = equiped_gun - 1
+	var new_gun_num = equipped_gun - 1
 	if new_gun_num < 0:
-		new_gun_num = len(equiped_guns) - 1
+		new_gun_num = len(equipped_guns) - 1
 	switch_weapon(new_gun_num)
 
 
 # Internal
-func equiped():
-	return equiped_guns[equiped_gun]
+func equipped():
+	return equipped_guns[equipped_gun]
 
 func switch_weapon(num):
-	if num in range(len(equiped_guns)):
-		equiped().disconnect("reload", self, "_on_EquipedGun_reload")
-		equiped().disconnect("ammo_change", self, "_on_EquipedGun_ammo_change")
-		equiped_gun = num
-		equiped().connect("reload", self, "_on_EquipedGun_reload")
-		equiped().connect("ammo_change", self, "_on_EquipedGun_ammo_change")
-		equiped().make_active()
+	if num in range(len(equipped_guns)):
+		equipped().disconnect("reload", self, "_on_equippedGun_reload")
+		equipped().disconnect("ammo_change", self, "_on_equippedGun_ammo_change")
+		equipped_gun = num
+		equipped().connect("reload", self, "_on_equippedGun_reload")
+		equipped().connect("ammo_change", self, "_on_equippedGun_ammo_change")
+		equipped().make_active()
 
 
 # Ammo Controller
@@ -92,8 +94,8 @@ func update_ammo(type, ammo):
 
 
 # Signal Relay
-func _on_EquipedGun_reload(is_reloading):
+func _on_equippedGun_reload(is_reloading):
 	emit_signal("reload", is_reloading)
 
-func _on_EquipedGun_ammo_change(current_mag, reserve_count):
+func _on_equippedGun_ammo_change(current_mag, reserve_count):
 	emit_signal("ammo_change", current_mag, reserve_count)

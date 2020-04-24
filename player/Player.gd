@@ -7,17 +7,17 @@ var current_move_speed
 
 onready var torch = get_node("TorchLight")
 onready var torch_ambient = get_node("TorchLightAmbient")
-
 onready var weaponController = get_node("WeaponController")
 
 signal stamina_changed
 signal ammo_change
 signal reload
+signal weapon_change
 
 func _ready():
 	yield(get_tree(), "idle_frame")
 	get_tree().call_group("zombies", "set_player", self)
-
+	
 func _physics_process(delta):
 	move(delta)
 	
@@ -97,3 +97,6 @@ func _on_WeaponController_reload(is_reloading):
 
 func _on_WeaponController_ammo_change(current_mag, reserve_count):
 	emit_signal("ammo_change", current_mag, reserve_count)
+	
+func _on_WeaponController_weapon_change(new_spread):
+	emit_signal("weapon_change", new_spread)

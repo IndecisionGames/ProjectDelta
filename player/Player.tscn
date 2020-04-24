@@ -63,3 +63,4 @@ polygon = PoolVector2Array( -10.7689, 4.63358, -1.05363, -27.2233, 22.2177, -23.
 script = ExtResource( 6 )
 [connection signal="ammo_change" from="WeaponController" to="." method="_on_WeaponController_ammo_change"]
 [connection signal="reload" from="WeaponController" to="." method="_on_WeaponController_reload"]
+[connection signal="weapon_change" from="WeaponController" to="." method="_on_WeaponController_weapon_change"]
