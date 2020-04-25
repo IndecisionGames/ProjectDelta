@@ -39,6 +39,7 @@ z_index = -1
 texture = SubResource( 2 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Map"]
+visible = false
 color = Color( 0.0196078, 0.0196078, 0.0196078, 1 )
 
 [node name="Background" type="Sprite" parent="Map"]

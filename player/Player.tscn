@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/soldier.png" type="Texture" id=2]
 [ext_resource path="res://environment/lightmasks/circle.png" type="Texture" id=3]
 [ext_resource path="res://environment/lightmasks/torchmask.png" type="Texture" id=4]
+[ext_resource path="res://environment/lightmasks/testtorchmask1.png" type="Texture" id=5]
 [ext_resource path="res://weapons/WeaponController.gd" type="Script" id=6]
 
 [node name="Player" type="KinematicBody2D"]
@@ -35,6 +36,7 @@ shadow_enabled = true
 shadow_buffer_size = 256
 
 [node name="TorchLightAmbient" type="Light2D" parent="."]
+visible = false
 position = Vector2( 34.8494, 0.629852 )
 scale = Vector2( 7.316, 15.464 )
 texture = ExtResource( 4 )
@@ -46,13 +48,13 @@ shadow_enabled = true
 shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
 
 [node name="TorchLight" type="Light2D" parent="."]
-position = Vector2( 34.8494, 0.629852 )
-scale = Vector2( 10.146, 10.954 )
-texture = ExtResource( 4 )
-offset = Vector2( 21.27, 0 )
-texture_scale = 0.05
+position = Vector2( 3.163, -5.726 )
+scale = Vector2( 23.3, 23.3 )
+texture = ExtResource( 5 )
+offset = Vector2( 20.6, 0 )
+texture_scale = 0.02
 color = Color( 0.992157, 0.968627, 0.878431, 1 )
-energy = 1.5
+energy = 0.5
 shadow_enabled = true
 shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
 
