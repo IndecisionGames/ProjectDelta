@@ -96,7 +96,7 @@ func reload():
 
 
 func make_active():
-	print(gun_name + " Equiped")
+	print(gun_name + " Equipped")
 	time_since_fire = time_per_shot
 	emit_signal("reload", is_reloading)
 	emit_signal("ammo_change", current_mag, ammo_count.call_func(ammo_type))

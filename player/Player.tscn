@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/soldier.png" type="Texture" id=2]
+[ext_resource path="res://player/player.png" type="Texture" id=3]
 [ext_resource path="res://environment/lightmasks/testtorchmask1.png" type="Texture" id=5]
 [ext_resource path="res://weapons/WeaponController.gd" type="Script" id=6]
 
@@ -9,16 +10,23 @@
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 17.5658, -6.64151 )
 texture = ExtResource( 2 )
 
+[node name="Sprite2" type="Sprite" parent="."]
+use_parent_material = true
+position = Vector2( 12.967, -12.597 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 50.9887, 0.372604 )
+position = Vector2( 55, 6.3 )
 
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="CameraOffset" type="Position2D" parent="Pivot"]
-position = Vector2( 137.27, -0.307144 )
+position = Vector2( 137.27, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="Pivot/CameraOffset"]
 current = true
@@ -36,7 +44,8 @@ shadow_enabled = true
 shadow_color = Color( 0.992157, 0.988235, 0.988235, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -10.7689, 4.63358, -1.05363, -27.2233, 22.2177, -23.1565, 37.3554, -8.24474, 45.2632, 0.566742, 8.20973, 14.8007, -3.9908, 12.7673 )
+position = Vector2( -0.951317, -0.475655 )
+polygon = PoolVector2Array( -24.0211, -26.2886, -3.33023, -29.1425, 26.8737, -26.5264, 36.8624, -11.5434, 43.0459, 7.48275, 12.6041, 14.6175, -9.75155, 9.86102, -26.6372, 0.585785 )
 
 [node name="WeaponController" type="Node2D" parent="."]
 script = ExtResource( 6 )

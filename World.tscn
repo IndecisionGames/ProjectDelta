@@ -52,12 +52,7 @@ scale = Vector2( 100, 100 )
 z_index = -4096
 texture = ExtResource( 2 )
 
-[node name="Characters" type="Node2D" parent="."]
-
-[node name="Player" parent="Characters" instance=ExtResource( 3 )]
-position = Vector2( 522.781, 336.507 )
-
-[node name="Objects" type="Control" parent="."]
+[node name="Entities" type="Control" parent="."]
 material = SubResource( 3 )
 margin_right = 40.0
 margin_bottom = 40.0
@@ -65,10 +60,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pickup" parent="Objects" instance=ExtResource( 5 )]
+[node name="Pickup" parent="Entities" instance=ExtResource( 5 )]
 use_parent_material = true
 position = Vector2( 454.208, 249.93 )
-[connection signal="ammo_change" from="Characters/Player" to="UI/GUI" method="_on_Player_ammo_change"]
-[connection signal="reload" from="Characters/Player" to="UI/GUI" method="_on_Player_reload"]
-[connection signal="spread_change" from="Characters/Player" to="UI/GUI" method="_on_Player_spread_change"]
-[connection signal="stamina_changed" from="Characters/Player" to="UI/GUI" method="_on_Player_stamina_changed"]
+
+[node name="Characters" type="Node2D" parent="Entities"]
+use_parent_material = true
+
+[node name="Player" parent="Entities/Characters" instance=ExtResource( 3 )]
+use_parent_material = true
+position = Vector2( 522.781, 336.507 )
+[connection signal="ammo_change" from="Entities/Characters/Player" to="UI/GUI" method="_on_Player_ammo_change"]
+[connection signal="reload" from="Entities/Characters/Player" to="UI/GUI" method="_on_Player_reload"]
+[connection signal="spread_change" from="Entities/Characters/Player" to="UI/GUI" method="_on_Player_spread_change"]
+[connection signal="stamina_changed" from="Entities/Characters/Player" to="UI/GUI" method="_on_Player_stamina_changed"]
