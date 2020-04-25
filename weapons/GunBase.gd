@@ -46,7 +46,7 @@ signal ammo_change
 var current_mag: int
 var is_reloading: bool
 var time_since_reload: float
-var current_spread: float
+var compound_spread: float
 
 var is_trigger_held: bool
 onready var time_per_shot: float
@@ -198,8 +198,8 @@ func calculate_spread(move_speed):
 	var movement_multiplier = movement_penalty*move_speed/5000.0
 	print(random_spread)
 	print (movement_multiplier+natural_spread)
-	current_spread =  min(movement_multiplier+natural_spread, deg2rad(145))
-	return random_spread*current_spread
+	compound_spread =  min(movement_multiplier+natural_spread, deg2rad(145))
+	return random_spread*compound_spread
 
 func toggle_muzzle_flash():
 	muzzle_flash.set_visible(!muzzle_flash.is_visible())

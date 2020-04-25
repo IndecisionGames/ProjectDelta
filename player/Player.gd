@@ -12,7 +12,7 @@ onready var weaponController = get_node("WeaponController")
 signal stamina_changed
 signal ammo_change
 signal reload
-signal weapon_change
+signal spread_change
 
 func _ready():
 	yield(get_tree(), "idle_frame")
@@ -98,5 +98,5 @@ func _on_WeaponController_reload(is_reloading):
 func _on_WeaponController_ammo_change(current_mag, reserve_count):
 	emit_signal("ammo_change", current_mag, reserve_count)
 	
-func _on_WeaponController_weapon_change(new_spread):
-	emit_signal("weapon_change", new_spread)
+func _on_WeaponController_spread_change(new_spread):
+	emit_signal("spread_change", new_spread)

@@ -1,6 +1,5 @@
 extends Node2D
 
-# Not yet used
 var color = Color.white;
 var error = 30;
 

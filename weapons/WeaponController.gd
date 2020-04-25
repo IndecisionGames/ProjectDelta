@@ -14,7 +14,7 @@ onready var equipped_gun = 0
 
 signal reload
 signal ammo_change
-signal weapon_change
+signal spread_change
 
 func _ready():
 	for gun_name in gun_list:
@@ -35,7 +35,7 @@ func _ready():
 
 func process(delta, position, direction, move_speed):
 	equipped().process(delta, position, direction, move_speed)
-	emit_signal("weapon_change", equipped().current_spread)
+	emit_signal("spread_change", equipped().compound_spread)
 
 func press_trigger():
 	equipped().press_trigger()

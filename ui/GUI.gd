@@ -30,6 +30,5 @@ func set_ammo_text(ammo_count):
 func _on_Player_reload(is_reloading):
 	reloading_progress.set_visible(is_reloading)
 
-
-func _on_Player_weapon_change(new_spread):
+func _on_Player_spread_change(new_spread):
 	crosshair.updateCrosshairError(new_spread)
