@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/soldier.png" type="Texture" id=2]
-[ext_resource path="res://environment/lightmasks/circle.png" type="Texture" id=3]
-[ext_resource path="res://environment/lightmasks/torchmask.png" type="Texture" id=4]
 [ext_resource path="res://environment/lightmasks/testtorchmask1.png" type="Texture" id=5]
 [ext_resource path="res://weapons/WeaponController.gd" type="Script" id=6]
 
@@ -26,37 +24,16 @@ position = Vector2( 137.27, -0.307144 )
 current = true
 smoothing_enabled = true
 
-[node name="PlayerAmbientLight" type="Light2D" parent="."]
-position = Vector2( 0.349159, -0.12323 )
-scale = Vector2( 3.5042, 3.46055 )
-texture = ExtResource( 3 )
-texture_scale = 0.1
-energy = 0.3
-shadow_enabled = true
-shadow_buffer_size = 256
-
-[node name="TorchLightAmbient" type="Light2D" parent="."]
-visible = false
-position = Vector2( 34.8494, 0.629852 )
-scale = Vector2( 7.316, 15.464 )
-texture = ExtResource( 4 )
-offset = Vector2( 33.16, 0 )
-texture_scale = 0.08
-color = Color( 0.992157, 0.968627, 0.878431, 1 )
-energy = 0.5
-shadow_enabled = true
-shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
-
 [node name="TorchLight" type="Light2D" parent="."]
 position = Vector2( 3.163, -5.726 )
 scale = Vector2( 23.3, 23.3 )
 texture = ExtResource( 5 )
 offset = Vector2( 20.6, 0 )
 texture_scale = 0.02
-color = Color( 0.992157, 0.968627, 0.878431, 1 )
-energy = 0.5
+energy = 1.2
+mode = 2
 shadow_enabled = true
-shadow_color = Color( 0.447059, 0.447059, 0.447059, 0 )
+shadow_color = Color( 0.992157, 0.988235, 0.988235, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -10.7689, 4.63358, -1.05363, -27.2233, 22.2177, -23.1565, 37.3554, -8.24474, 45.2632, 0.566742, 8.20973, 14.8007, -3.9908, 12.7673 )

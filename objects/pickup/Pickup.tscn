@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/pickup/Pickup.gd" type="Script" id=2]
 [ext_resource path="res://environment/lightmasks/circle.png" type="Texture" id=3]
@@ -7,18 +7,22 @@
 radius = 22.0
 height = 4.5
 
+[sub_resource type="ShaderMaterial" id=2]
+
 [node name="Pickup" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 2.35619
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+use_parent_material = true
 scale = Vector2( 0.2, 0.2 )
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
+material = SubResource( 2 )
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 3 )
 texture_scale = 1.97

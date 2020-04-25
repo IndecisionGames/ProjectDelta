@@ -1,16 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://environment/map.tres" type="TileSet" id=1]
 [ext_resource path="res://environment/black.png" type="Texture" id=2]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/pickup/Pickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://environment/fov_vision.shader" type="Shader" id=6]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.392157, 0.392157, 0.392157, 1, 0.392157, 0.392157, 0.392157, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 6 )
 
 [node name="World" type="Node"]
 
@@ -53,7 +57,16 @@ texture = ExtResource( 2 )
 [node name="Player" parent="Characters" instance=ExtResource( 3 )]
 position = Vector2( 522.781, 336.507 )
 
-[node name="Pickup" parent="." instance=ExtResource( 5 )]
+[node name="Objects" type="Control" parent="."]
+material = SubResource( 3 )
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pickup" parent="Objects" instance=ExtResource( 5 )]
+use_parent_material = true
 position = Vector2( 454.208, 249.93 )
 [connection signal="ammo_change" from="Characters/Player" to="UI/GUI" method="_on_Player_ammo_change"]
 [connection signal="reload" from="Characters/Player" to="UI/GUI" method="_on_Player_reload"]

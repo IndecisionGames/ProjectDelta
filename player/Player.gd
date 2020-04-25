@@ -5,8 +5,6 @@ const STAMINA_REC_SPEED = 5
 var stamina = 100
 var current_move_speed
 
-onready var torch = get_node("TorchLight")
-onready var torch_ambient = get_node("TorchLightAmbient")
 onready var weaponController = get_node("WeaponController")
 
 signal stamina_changed
@@ -26,10 +24,6 @@ func _physics_process(delta):
 	
 	weaponController.process(delta, get_node("Position2D").get_global_position(), look_vec.normalized(), current_move_speed)
 	
-	if Input.is_action_just_pressed("torch"):
-		toggle_torch()
-		
-		
 	if Input.is_action_just_pressed("change_weapon_up"):
 		weaponController.weapon_up()
 		
@@ -81,9 +75,6 @@ func move(delta):
 	move_and_slide(move_vec)
 	current_move_speed = move_vec.length()
 	
-func toggle_torch():
-	torch.set_visible(!torch.is_visible())
-	torch_ambient.set_visible(!torch_ambient.is_visible())
 	
 func kill():
 	get_tree().reload_current_scene()
