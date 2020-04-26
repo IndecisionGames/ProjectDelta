@@ -45,13 +45,16 @@ func _physics_process(delta):
 		if Input.is_action_just_released("shoot"):
 			weaponController.release_trigger()
 			rpc_unreliable("n_input", "shoot_release", player_id)
-		
+			
 		if Input.is_action_just_pressed("shoot"):
 			weaponController.press_trigger()
 			rpc_unreliable("n_input", "shoot", player_id)
 		#		var coll = raycast.get_collider()
 		#		if raycast.is_colliding() and coll.has_method("kill"):
 		#			coll.kill()
+		
+		if not Input.is_action_pressed("shoot"):
+			rpc_unreliable("n_input", "shoot_release", player_id)
 
 func sprint(delta):
 	if Input.is_action_pressed("sprint"):
@@ -110,9 +113,9 @@ remote func n_input(input, pid):
 			pnode.weaponController.weapon_down()
 		"reload":
 			pnode.weaponController.reload()
-		"shoot":
-			pnode.weaponController.release_trigger()
 		"shoot_release":
+			pnode.weaponController.release_trigger()
+		"shoot":
 			pnode.weaponController.press_trigger()
 			
 remote func n_process_weapon_controller(delta, pos, rot, speed, pid):
@@ -122,7 +125,8 @@ remote func n_process_weapon_controller(delta, pos, rot, speed, pid):
 	pnode.weaponController.process(delta, pos, rot, speed)
 	
 func process_ghost_player():
-	$TorchLight.set_visible(false)
+	$TorchLight.queue_free()
+	$Pivot.queue_free()
 	
 func kill():
 	get_tree().reload_current_scene()
