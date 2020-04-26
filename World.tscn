@@ -67,5 +67,5 @@ position = Vector2( 454.208, 249.93 )
 [node name="Characters" type="Node2D" parent="Entities"]
 use_parent_material = true
 
-[node name="Network" type="Node" parent="."]
+[node name="NetworkGame" type="Node" parent="."]
 script = ExtResource( 7 )
