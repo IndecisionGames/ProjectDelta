@@ -196,8 +196,8 @@ func calculate_spread(move_speed):
 	var random_spread = rng.randf_range(-1.0, 1.0)
 	var natural_spread = spread/100.0
 	var movement_multiplier = movement_penalty*move_speed/5000.0
-	print(random_spread)
-	print (movement_multiplier+natural_spread)
+	#print(random_spread)
+	#print (movement_multiplier+natural_spread)
 	compound_spread =  min(movement_multiplier+natural_spread, deg2rad(145))
 	return random_spread*compound_spread
 

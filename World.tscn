@@ -2,10 +2,10 @@
 
 [ext_resource path="res://environment/map.tres" type="TileSet" id=1]
 [ext_resource path="res://environment/black.png" type="Texture" id=2]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/pickup/Pickup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/fov_vision.shader" type="Shader" id=6]
+[ext_resource path="res://Network.gd" type="Script" id=7]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.392157, 0.392157, 0.392157, 1, 0.392157, 0.392157, 0.392157, 1 )
@@ -67,10 +67,5 @@ position = Vector2( 454.208, 249.93 )
 [node name="Characters" type="Node2D" parent="Entities"]
 use_parent_material = true
 
-[node name="Player" parent="Entities/Characters" instance=ExtResource( 3 )]
-use_parent_material = true
-position = Vector2( 522.781, 336.507 )
-[connection signal="ammo_change" from="Entities/Characters/Player" to="UI/GUI" method="_on_Player_ammo_change"]
-[connection signal="reload" from="Entities/Characters/Player" to="UI/GUI" method="_on_Player_reload"]
-[connection signal="spread_change" from="Entities/Characters/Player" to="UI/GUI" method="_on_Player_spread_change"]
-[connection signal="stamina_changed" from="Entities/Characters/Player" to="UI/GUI" method="_on_Player_stamina_changed"]
+[node name="Network" type="Node" parent="."]
+script = ExtResource( 7 )

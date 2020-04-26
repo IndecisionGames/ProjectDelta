@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://objects/bullet/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://objects/bullet/bullet.png" type="Texture" id=2]
 [ext_resource path="res://environment/lightmasks/circle.png" type="Texture" id=3]
+[ext_resource path="res://environment/fov_vision.shader" type="Shader" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.3578
 height = 29.2772
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource( 1 )
@@ -21,11 +25,13 @@ scale = Vector2( 0.4, 0.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
 position = Vector2( 1.12743, -0.39814 )
 scale = Vector2( 0.850084, 0.679779 )
 texture = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 position = Vector2( -0.291046, -0.02079 )
 scale = Vector2( 0.889017, 0.495162 )
 texture = ExtResource( 3 )
