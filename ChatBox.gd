@@ -13,15 +13,21 @@ var groups = [
 var group_index = 0
 var user_name = "Siv"
 
+
 func _ready():
 	inputField.connect("text_entered", self, "text_entered")
 	change_group(0)
+	
 
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ENTER:
-			inputField.grab_focus()
+			if inputField.has_focus() and len(inputField.text) == 0:
+				inputField.release_focus()
+			else:
+				inputField.grab_focus()
 		if event.pressed and event.scancode == KEY_ESCAPE:
+			inputField.text = ''
 			inputField.release_focus()
 		if event.pressed and event.scancode == KEY_TAB:
 			if inputField.has_focus():
@@ -36,11 +42,12 @@ func change_group(value):
 
 func add_message(username, text, group = 0):
 	if len(text) > 0:
-		chatLog.bbcode_text += '\n'
 		chatLog.bbcode_text += '[color=' + groups[group]['color'] +']'
 		chatLog.bbcode_text += '[' + username + ']: '
 		chatLog.bbcode_text += text
 		chatLog.bbcode_text += '[/color]'
+		chatLog.bbcode_text += '\n'
+		
 
 func text_entered(text):
 	print(text)
