@@ -142,3 +142,9 @@ func _on_WeaponController_ammo_change(current_mag, reserve_count):
 	
 func _on_WeaponController_spread_change(new_spread):
 	emit_signal("spread_change", new_spread)
+	
+func connect_to_gui(gui):
+	connect("reload", gui, "_on_Player_reload")
+	connect("ammo_change", gui, "_on_Player_ammo_change")
+	connect("spread_change", gui, "_on_Player_spread_change")
+	connect("stamina_changed", gui, "_on_Player_stamina_changed")

@@ -93,10 +93,14 @@ func spawn_player(id):
 	if id == get_tree().get_network_unique_id():
 		player.set_network_master(id)
 		player.control   = true
+		connect_gui_to_player(player)
 	else:
 		player.process_ghost_player()
 		
-	#get_parent().call_deferred('add_child', player)
 	get_node("/root/World/Entities/Characters").call_deferred('add_child', player)
 	print('Spawned Player at:', player.get_position())
+
+func connect_gui_to_player(player):
+	var gui = get_node("/root/World/UI/GUI")
+	player.connect_to_gui(gui)
 	

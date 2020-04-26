@@ -7,7 +7,6 @@ onready var tween = get_node("Tween")
 onready var crosshair = get_node("Crosshair")
 
 func _ready():
-	print("test")
 	var player_max_stamina = 100
 	stamina_bar.max_value = player_max_stamina
 	stamina_bar.value = player_max_stamina
