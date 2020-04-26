@@ -28,6 +28,7 @@ func _physics_process(delta):
 		move(delta)
 		
 		weaponController.process(delta, get_node("Position2D").get_global_position(), look_vec.normalized(), current_move_speed)
+		rpc_unreliable("n_process_weapon_controller", delta, get_node("Position2D").get_global_position(), look_vec.normalized(), current_move_speed, player_id)
 		
 		if Input.is_action_just_pressed("change_weapon_up"):
 			weaponController.weapon_up()
@@ -113,6 +114,12 @@ remote func n_input(input, pid):
 			pnode.weaponController.release_trigger()
 		"shoot_release":
 			pnode.weaponController.press_trigger()
+			
+remote func n_process_weapon_controller(delta, pos, rot, speed, pid):
+	var root = get_parent()
+	var pnode = root.get_node(str(pid))
+	
+	pnode.weaponController.process(delta, pos, rot, speed)
 	
 func process_ghost_player():
 	$TorchLight.set_visible(false)
