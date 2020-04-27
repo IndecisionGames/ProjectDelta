@@ -11,7 +11,7 @@ var groups = [
 var system_color = '#f1c234'
 var group_index = 0
 
-var username = "Siv"
+var username = "Player"
 
 func _ready():
 	inputField.connect("text_entered", self, "text_entered")
