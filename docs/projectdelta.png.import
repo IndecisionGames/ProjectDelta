@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/project-delta.png-4f54294bf5caf0f3517a48701b61a28e.stex"
+path="res://.import/projectdelta.png-4f8ba74f2a08c943973d8941b48b483c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://docs/project-delta.png"
-dest_files=[ "res://.import/project-delta.png-4f54294bf5caf0f3517a48701b61a28e.stex" ]
+source_file="res://docs/projectdelta.png"
+dest_files=[ "res://.import/projectdelta.png-4f8ba74f2a08c943973d8941b48b483c.stex" ]
 
 [params]
 
