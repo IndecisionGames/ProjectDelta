@@ -5,19 +5,17 @@ onready var inputLabel = get_node("VBoxContainer/HBoxContainer/Label")
 onready var inputField = get_node("VBoxContainer/HBoxContainer/LineEdit")
 
 var groups = [
-	{'name': 'Team', 'color': '#34c5f1'},
-	{'name': 'Match', 'color': '#f1c234'},
-	{'name': 'Global', 'color': '#ffffff'}
+	{'name': 'All', 'color': '#ffffff'},
+	{'name': 'Team', 'color': '#34c5f1'}
 ]
-
+var system_color = '#f1c234'
 var group_index = 0
-var user_name = "Siv"
 
+var username = "Siv"
 
 func _ready():
 	inputField.connect("text_entered", self, "text_entered")
 	change_group(0)
-	
 
 func _input(event):
 	if event is InputEventKey:
@@ -40,7 +38,7 @@ func change_group(value):
 	inputLabel.text = '[' + groups[group_index]['name'] +']'
 	inputLabel.set('custom_colors/font_color', Color(groups[group_index]['color']))
 
-func add_message(username, text, group = 0):
+func add_message(username, text, group = 0, remote_msg = false):
 	if len(text) > 0:
 		chatLog.bbcode_text += '[color=' + groups[group]['color'] +']'
 		chatLog.bbcode_text += '[' + username + ']: '
@@ -48,10 +46,21 @@ func add_message(username, text, group = 0):
 		chatLog.bbcode_text += '[/color]'
 		chatLog.bbcode_text += '\n'
 		
+		if not remote_msg:
+			rpc_unreliable("n_add_message", username, text, group)
+
+remote func n_add_message(username, text, group):
+	add_message(username, text, group, true)
+
+func add_system_message(text):
+	if len(text) > 0:
+		chatLog.bbcode_text += '[color=' + system_color +']'
+		chatLog.bbcode_text += text
+		chatLog.bbcode_text += '[/color]'
+		chatLog.bbcode_text += '\n'
 
 func text_entered(text):
-	print(text)
-	add_message(user_name, text, group_index)
+	add_message(username, text, group_index)
 	inputField.text = ''
 	if len(text) > 0:
 		inputField.release_focus()
