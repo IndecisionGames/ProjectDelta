@@ -52,6 +52,10 @@ func _physics_process(delta):
 		#		var coll = raycast.get_collider()
 		#		if raycast.is_colliding() and coll.has_method("kill"):
 		#			coll.kill()
+
+		if Input.is_action_just_pressed("switch_shoulder"):
+			switch_shoulder()
+			rpc_unreliable("n_input", "switch_shoulder", player_id)
 		
 		if not Input.is_action_pressed("shoot"):
 			rpc_unreliable("n_input", "shoot_release", player_id)
@@ -117,6 +121,8 @@ remote func n_input(input, pid):
 			pnode.weaponController.release_trigger()
 		"shoot":
 			pnode.weaponController.press_trigger()
+		"switch_shoulder":
+			pnode.switch_shoulder()
 			
 remote func n_process_weapon_controller(delta, pos, rot, speed, pid):
 	var root = get_parent()
@@ -133,6 +139,9 @@ func kill():
 	
 func pickup_ammo(type, amount):
 	weaponController.update_ammo(type, amount)
+
+func switch_shoulder():
+	apply_scale(Vector2(1, -1))
 
 func _on_WeaponController_reload(is_reloading):
 	emit_signal("reload", is_reloading)
